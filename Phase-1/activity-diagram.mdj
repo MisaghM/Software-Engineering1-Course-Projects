@@ -4,27 +4,26 @@
 	"name": "SaPaMi",
 	"ownedElements": [
 		{
-			"_type": "UMLModel",
-			"_id": "AAAAAAFF+qBWK6M3Z8Y=",
+			"_type": "UMLActivity",
+			"_id": "AAAAAAGHfwEAjbLxiDI=",
 			"_parent": {
 				"$ref": "AAAAAAFF+h6SjaM2Hec="
 			},
 			"name": "SaPaMi",
 			"ownedElements": [
 				{
-					"_type": "UMLClassDiagram",
-					"_id": "AAAAAAFF+qBtyKM79qY=",
+					"_type": "UMLActivityDiagram",
+					"_id": "AAAAAAGHfwEAjbLy5xQ=",
 					"_parent": {
-						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
+						"$ref": "AAAAAAGHfwEAjbLxiDI="
 					},
-					"name": "Main",
-					"defaultDiagram": true
+					"name": "Main"
 				},
 				{
 					"_type": "UMLActivity",
 					"_id": "AAAAAAGHehNatobmKLU=",
 					"_parent": {
-						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
+						"$ref": "AAAAAAGHfwEAjbLxiDI="
 					},
 					"name": "Validate User",
 					"ownedElements": [
@@ -5175,7 +5174,7 @@
 					"_type": "UMLActivity",
 					"_id": "AAAAAAGHTDDzUI5meWo=",
 					"_parent": {
-						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
+						"$ref": "AAAAAAGHfwEAjbLxiDI="
 					},
 					"name": "Choose Service",
 					"ownedElements": [
@@ -6392,7 +6391,7 @@
 					"_type": "UMLActivity",
 					"_id": "AAAAAAGHTGENyJE3H1M=",
 					"_parent": {
-						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
+						"$ref": "AAAAAAGHfwEAjbLxiDI="
 					},
 					"name": "Check User Intention",
 					"ownedElements": [
@@ -8538,7 +8537,7 @@
 					"_type": "UMLActivity",
 					"_id": "AAAAAAGHTLcNJpNGP78=",
 					"_parent": {
-						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
+						"$ref": "AAAAAAGHfwEAjbLxiDI="
 					},
 					"name": "Change Expert",
 					"ownedElements": [
@@ -11048,7 +11047,7 @@
 					"_type": "UMLActivity",
 					"_id": "AAAAAAGHTP/yzZUX4wE=",
 					"_parent": {
-						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
+						"$ref": "AAAAAAGHfwEAjbLxiDI="
 					},
 					"name": "Reserve Services",
 					"ownedElements": [
@@ -14250,7 +14249,7 @@
 					"_type": "UMLActivity",
 					"_id": "AAAAAAGHTT+i3Jg40nk=",
 					"_parent": {
-						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
+						"$ref": "AAAAAAGHfwEAjbLxiDI="
 					},
 					"name": "Request Visa",
 					"ownedElements": [
@@ -16961,7 +16960,7 @@
 					"_type": "UMLActivity",
 					"_id": "AAAAAAGHeu+yPQjzs7Q=",
 					"_parent": {
-						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
+						"$ref": "AAAAAAGHfwEAjbLxiDI="
 					},
 					"name": "View Services",
 					"ownedElements": [
@@ -18967,7 +18966,7 @@
 					"_type": "UMLActivity",
 					"_id": "AAAAAAGHexOzbg5Esuw=",
 					"_parent": {
-						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
+						"$ref": "AAAAAAGHfwEAjbLxiDI="
 					},
 					"name": "Buy SIM Card",
 					"ownedElements": [
@@ -22646,7 +22645,7 @@
 					"_type": "UMLActivity",
 					"_id": "AAAAAAGHe0Zh8LO19FI=",
 					"_parent": {
-						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
+						"$ref": "AAAAAAGHfwEAjbLxiDI="
 					},
 					"name": "Service in Iran",
 					"ownedElements": [
@@ -24503,7 +24502,7 @@
 					"_type": "UMLActivity",
 					"_id": "AAAAAAGHe14G+7Yutt4=",
 					"_parent": {
-						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
+						"$ref": "AAAAAAGHfwEAjbLxiDI="
 					},
 					"name": "Coming to Iran",
 					"ownedElements": [
@@ -26894,7 +26893,7 @@
 					"_type": "UMLActivity",
 					"_id": "AAAAAAGHe2h9/7gcUSQ=",
 					"_parent": {
-						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
+						"$ref": "AAAAAAGHfwEAjbLxiDI="
 					},
 					"name": "Repatriation ",
 					"ownedElements": [
@@ -29850,7 +29849,7 @@
 					"_type": "UMLActivity",
 					"_id": "AAAAAAGHfAV+WCZPJxw=",
 					"_parent": {
-						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
+						"$ref": "AAAAAAGHfwEAjbLxiDI="
 					},
 					"name": "Edit Health Package",
 					"ownedElements": [
@@ -32784,7 +32783,7 @@
 					"_type": "UMLActivity",
 					"_id": "AAAAAAGHfFxPISq0SZE=",
 					"_parent": {
-						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
+						"$ref": "AAAAAAGHfwEAjbLxiDI="
 					},
 					"name": "Rate",
 					"ownedElements": [
@@ -34448,7 +34447,7 @@
 					"_type": "UMLActivity",
 					"_id": "AAAAAAGHfMw9NTa1M4I=",
 					"_parent": {
-						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
+						"$ref": "AAAAAAGHfwEAjbLxiDI="
 					},
 					"name": "Reserve Accommodation",
 					"ownedElements": [
