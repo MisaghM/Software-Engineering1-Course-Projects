@@ -1,0 +1,25 @@
+{
+	"_type": "Project",
+	"_id": "AAAAAAFF+h6SjaM2Hec=",
+	"name": "SaPaMi",
+	"ownedElements": [
+		{
+			"_type": "UMLModel",
+			"_id": "AAAAAAGH62sykIO9T/w=",
+			"_parent": {
+				"$ref": "AAAAAAFF+h6SjaM2Hec="
+			},
+			"name": "UseCases",
+			"ownedElements": [
+				{
+					"_type": "UMLUseCaseDiagram",
+					"_id": "AAAAAAGH62sykIO+yGs=",
+					"_parent": {
+						"$ref": "AAAAAAGH62sykIO9T/w="
+					},
+					"name": "Main"
+				}
+			]
+		}
+	]
+}
