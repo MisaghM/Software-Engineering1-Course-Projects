@@ -718,13 +718,30 @@
 											"height": 13,
 											"text": "+Attribute1",
 											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
+											"_id": "AAAAAAGIROnbTEkCqxM=",
+											"_parent": {
+												"$ref": "AAAAAAGIQkvB2+wUI9k="
+											},
+											"model": {
+												"$ref": "AAAAAAGIROnbREj/Sto="
+											},
+											"font": "Arial;13;0",
+											"left": 1333,
+											"top": 867,
+											"width": 166.55615234375,
+											"height": 13,
+											"text": "+prerequisites: list<string>",
+											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 1328,
 									"top": 817,
 									"width": 176.55615234375,
-									"height": 53
+									"height": 68
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -737,7 +754,7 @@
 									},
 									"font": "Arial;13;0",
 									"left": 1328,
-									"top": 870,
+									"top": 885,
 									"width": 176.55615234375,
 									"height": 10
 								},
@@ -9945,27 +9962,6 @@
 							"subViews": [
 								{
 									"_type": "EdgeLabelView",
-									"_id": "AAAAAAGIRGY4bu8VFnU=",
-									"_parent": {
-										"$ref": "AAAAAAGIQxWzrfJnxwE="
-									},
-									"model": {
-										"$ref": "AAAAAAGIQxWzrPJlSy4="
-									},
-									"font": "Arial;13;0",
-									"left": 140,
-									"top": 407,
-									"width": 14.82177734375,
-									"height": 13,
-									"alpha": -0.5235987755982988,
-									"distance": 30,
-									"hostEdge": {
-										"$ref": "AAAAAAGIQxWzrfJnxwE="
-									},
-									"text": "+1"
-								},
-								{
-									"_type": "EdgeLabelView",
 									"_id": "AAAAAAGIQxWzrfJo7lQ=",
 									"_parent": {
 										"$ref": "AAAAAAGIQxWzrfJnxwE="
@@ -10188,9 +10184,6 @@
 							},
 							"tailMultiplicityLabel": {
 								"$ref": "AAAAAAGIQxWzrfJtmm4="
-							},
-							"headRoleNameLabel": {
-								"$ref": "AAAAAAGIRGY4bu8VFnU="
 							},
 							"headPropertyLabel": {
 								"$ref": "AAAAAAGIQxWzrfJvrmc="
@@ -15114,9 +15107,9 @@
 										"$ref": "AAAAAAGIRMxv8NbogbI="
 									},
 									"font": "Arial;13;0",
-									"left": 1426,
+									"left": 1425,
 									"top": 1160,
-									"width": 5.05908203125,
+									"width": 6.5,
 									"height": 13,
 									"alpha": 0.5235987755982988,
 									"distance": 25,
@@ -15639,6 +15632,15 @@
 							},
 							"name": "Attribute1",
 							"type": ""
+						},
+						{
+							"_type": "UMLAttribute",
+							"_id": "AAAAAAGIROnbREj/Sto=",
+							"_parent": {
+								"$ref": "AAAAAAGIQkvB2+wMwLU="
+							},
+							"name": "prerequisites",
+							"type": "list<string>"
 						}
 					]
 				},
