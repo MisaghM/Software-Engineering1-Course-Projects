@@ -62,6 +62,13 @@ def reserve_package(request, id):
 def confirm_reserve(request, id):
     package = TherapeuticPackage.objects.get(id=id)
     if request.method == 'POST':
+        reservation = Reservation.objects.filter(user=Patient.objects.get(user=request.user)).order_by('id').last()
+        service = TherapeuticService.objects.filter(reservation=reservation, therapeutic_package=package).order_by('id').last()
+        service_record = ServiceRecord.objects.get(service=service)
+        service_record.paid = 0.3 * service_record.cost
+        service_record.save()
+        reservation.bill.total_paid += service_record.paid
+        reservation.bill.save()
         return render(request, 'packages/reserve_thanks.html')
     return render(request, 'packages/confirm_reserve.html', {'package': package})
 
