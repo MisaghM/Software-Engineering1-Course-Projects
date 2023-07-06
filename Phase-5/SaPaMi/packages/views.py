@@ -66,6 +66,7 @@ def confirm_reserve(request, id):
         service = TherapeuticService.objects.filter(reservation=reservation, therapeutic_package=package).order_by('id').last()
         service_record = ServiceRecord.objects.get(service=service)
         service_record.paid = 0.3 * service_record.cost
+        service_record.status = ServiceRecord.Status.PREPAID
         service_record.save()
         reservation.bill.total_paid += service_record.paid
         reservation.bill.save()

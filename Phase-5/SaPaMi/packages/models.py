@@ -49,6 +49,7 @@ class TherapeuticService(Service):
 class ServiceRecord(models.Model):
     class Status(models.TextChoices):
         PAID = 'P', 'Paid'
+        PREPAID = 'R', 'Prepaid'
         UNPAID = 'U', 'Unpaid'
 
     service = models.OneToOneField(Service, on_delete=models.CASCADE)
