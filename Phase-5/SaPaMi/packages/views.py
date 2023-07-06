@@ -37,14 +37,14 @@ def new_reservation(user: Patient):
 def reserve_package(request, id):
     package = TherapeuticPackage.objects.get(id=id)
     user = Patient.objects.get(user=request.user)
-
+    date = request.POST.get('date')
     reservation = Reservation.objects.filter(user=user).order_by('id').last()
     if reservation is None or reservation.status != Reservation.Status.PENDING:
         reservation = new_reservation(user)
     service = TherapeuticService.objects.create(
         reservation=reservation,
         therapeutic_package=package,
-        datetime=datetime.now()
+        datetime=date,
     )
     ServiceRecord.objects.create(
         service=service,
