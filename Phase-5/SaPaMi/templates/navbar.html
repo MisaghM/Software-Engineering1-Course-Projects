@@ -2,8 +2,8 @@
 <nav id="navbar">
     <ul class="topnav">
         <li class="leftalign"><a href="{% url 'home' %}" id="navHome">Home</a></li>
-        {% if request.user.is_authenticated %}
         <li class="leftalign"><a href="javascript:void(0)" id="navPackageInfo">Package Info</a></li>
+        {% if request.user.is_authenticated %}
         <li class="leftalign"><a href="{% url 'user_reservations' %}" id="navReservations">Reservations</a></li>
         <li class="rightalign">
             <a href="{% url 'cas-logout' %}">Logout</a>
@@ -13,6 +13,7 @@
         <li class="rightalign">
             <a href="{% url 'cas' %}">Login</a>
         </li>
+        <li class="rightalign"><span id="welcome">Welcome to SaPaMi</span></li>
         {% endif %}
     </ul>
 </nav>

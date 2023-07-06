@@ -56,14 +56,14 @@ def reserve_package(request, id):
     reservation.bill.total_cost += package.approximate_price
     reservation.bill.save()
     return redirect('confirm_reserve', id)
-    return render(request, 'packages/reserve_package.html', {'package': package})
 
 
 @login_required(login_url='cas')
 def confirm_reserve(request, id):
+    package = TherapeuticPackage.objects.get(id=id)
     if request.method == 'POST':
-        return render('packages/reserve_thanks.html')
-    return render(request, 'packages/confirm_reserve.html')
+        return render(request, 'packages/reserve_thanks.html')
+    return render(request, 'packages/confirm_reserve.html', {'package': package})
 
 
 def user_reservations(request):
