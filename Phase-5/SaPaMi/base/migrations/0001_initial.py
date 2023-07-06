@@ -57,7 +57,7 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=100)),
                 ('address', models.CharField(max_length=100)),
                 ('work_fields', models.CharField(choices=[('PS', 'Psychology'), ('PY', 'Psychiatry'), ('PT', 'Psychotherapy'), ('PA', 'Psychoanalysis')], max_length=2)),
-                ('center_license', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='base.document')),
+                ('center_license', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='base.document', null=True)),
             ],
         ),
         migrations.CreateModel(
@@ -67,7 +67,7 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=100)),
                 ('medical_id', models.CharField(max_length=100)),
                 ('degree', models.CharField(max_length=100)),
-                ('doctor_license', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='base.document')),
+                ('doctor_license', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='base.document', null=True)),
             ],
         ),
     ]

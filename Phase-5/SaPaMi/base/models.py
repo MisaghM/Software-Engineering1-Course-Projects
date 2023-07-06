@@ -56,7 +56,7 @@ class HealthCenter(models.Model):
     name = models.CharField(max_length=100)
     address = models.CharField(max_length=100)
     work_fields = models.CharField(max_length=2, choices=WorkField.choices)
-    center_license = models.ForeignKey(Document, on_delete=models.CASCADE)
+    center_license = models.ForeignKey(Document, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.name
@@ -66,7 +66,7 @@ class Doctor(models.Model):
     name = models.CharField(max_length=100)
     medical_id = models.CharField(max_length=100)
     degree = models.CharField(max_length=100)
-    doctor_license = models.ForeignKey(Document, on_delete=models.CASCADE)
+    doctor_license = models.ForeignKey(Document, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.name
