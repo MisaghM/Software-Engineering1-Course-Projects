@@ -1,0 +1,75 @@
+input,
+select,
+button.inputbtnG {
+	color: white;
+}
+
+input:not([type="checkbox"], [type="radio"], [type="number"]),
+select,
+button.inputbtnG {
+	width: 100%;
+	margin: 8px 0;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="url"],
+input[type="email"],
+select {
+	display: inline-block;
+	background-color: rgb(26, 26, 26);
+	border: 1px solid rgba(212, 212, 212, 0.6);
+	border-radius: 3px;
+	box-sizing: border-box;
+	padding: 12px 20px;
+}
+textarea {
+	background-color: rgb(26, 26, 26);
+}
+
+input[type="submit"],
+button.inputbtnG {
+	background-color: hsl(120, 50%, 45%);
+	font-weight: bold;
+	padding: 14px 20px;
+	border: none;
+	border-radius: 3px;
+	cursor: pointer;
+}
+input[type="submit"]:hover,
+button.inputbtnG:hover {
+	background-color: hsl(120, 45%, 35%);
+}
+
+input[type="number"] {
+	background-color: rgb(26, 26, 26);
+}
+
+/*hide input number +- buttons*/
+/*Chrome, Safari, Edge, Opera*/
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/*Firefox*/
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.btnFuture {
+	display: inline-block;
+	border: 2px solid rgb(0, 140, 200);
+	background-color: rgb(26, 26, 26);
+	color: white;
+	padding: 12px 32px;
+	text-align: center;
+	font-size: large;
+	text-decoration: none;
+	transition-duration: 0.2s;
+	cursor: pointer;
+}
+
+.btnFuture:hover {
+	background-color: rgb(0, 140, 200);
+}

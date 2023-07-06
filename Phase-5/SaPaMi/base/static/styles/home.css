@@ -1,0 +1,87 @@
+#packages {
+	width: 54%;
+}
+
+div.package {
+	height: 150px;
+	display: block;
+	position: relative;
+	padding: 10px;
+	background-color: rgba(36, 36, 36, 0.9);
+	margin: 30px 0 0 30px;
+	clear: left;
+	border-left: 2px solid lavender;
+	transition: all 0.1s;
+}
+
+div.package:hover {
+	background-color: rgba(44, 44, 44, 0.9);
+	transform: scale(1.012);
+}
+
+div.package div.imgContainer {
+	float: left;
+	height: 150px;
+	width: 34%;
+	margin-right: 10px;
+	border: 1px solid rgba(230, 230, 250, 0.5);
+	border-radius: 1px;
+	padding: 1px;
+}
+
+div.package div.imgContainer img {
+	height: 100%;
+	width: 100%;
+	margin: auto;
+	display: block;
+	object-fit: contain;
+}
+
+div.package p {
+	padding-left: 10px;
+}
+
+div.package a.btnFuture {
+	transform: rotate(90deg);
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin-top: 60px;
+	margin-right: -120px;
+	width: 100px;
+}
+
+#filters {
+	position: fixed;
+	position: -webkit-sticky;
+	float: right;
+	width: 45%;
+	top: 95px;
+	right: 0;
+}
+
+#filters #filterForm {
+	background-color: rgba(36, 36, 36, 0.9);
+	border-bottom: 2px solid lavender;
+	width: auto;
+	margin: 0 12% 0 24%;
+	padding: 10px;
+}
+
+#filters #fHeader {
+	text-align: center;
+	font-weight: bold;
+	font-size: large;
+	text-decoration: underline;
+}
+
+#fApplyBtn {
+	width: 80%;
+}
+#fClearBtn {
+	width: 19%;
+	background-color: hsl(5, 70%, 40%);
+}
+#fClearBtn:hover {
+	background-color: hsl(5, 65%, 30%);
+}

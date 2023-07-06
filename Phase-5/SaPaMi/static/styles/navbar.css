@@ -1,0 +1,47 @@
+#navbar {
+	position: sticky;
+	position: -webkit-sticky;
+	top: 0;
+	z-index: 1;
+	transition: top 0.2s;
+	padding-top: 10px;
+}
+
+ul.topnav {
+	margin: 0 50px;
+	padding: 0;
+	opacity: 0.9;
+	list-style-type: none;
+	overflow: hidden;
+	background-color: #343434;
+}
+
+ul.topnav li {
+	border-right: 2px solid #525252;
+}
+ul.topnav li:last-child {
+	border: none;
+}
+ul.topnav li:nth-last-child(2) {
+	border-right: none;
+	border-left: 2px solid rgb(82, 82, 82);
+}
+
+ul.topnav li a,
+ul.topnav li span {
+	display: block;
+	text-shadow: 0 2px 1px rgba(0, 0, 0, 0.5);
+	color: white;
+	text-align: center;
+	text-decoration: none;
+	padding: 14px 16px;
+	transition: 0.1s;
+}
+
+ul.topnav li a:hover:not(.active) {
+	background-color: rgb(18, 18, 18);
+}
+
+ul.topnav li a.active {
+	background-color: rgb(0, 170, 50);
+}

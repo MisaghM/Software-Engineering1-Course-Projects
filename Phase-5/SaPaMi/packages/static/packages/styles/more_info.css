@@ -1,0 +1,72 @@
+div.container {
+	width: 60%;
+}
+
+div.recipe {
+	display: block;
+	position: relative;
+	padding: 10px;
+	background-color: rgba(36, 36, 36, 0.9);
+	margin: 30px 0 0 30px;
+	clear: left;
+	border-left: 2px solid lavender;
+	transition: all 0.1s;
+}
+
+div.recipe #recipe {
+	height: 250px;
+}
+
+div.recipe:hover {
+	background-color: rgba(44, 44, 44, 0.9);
+	transform: scale(1.012);
+}
+
+div.recipe div.imgContainer {
+	float: left;
+	width: 40%;
+	margin-right: 10px;
+	border: 1px solid rgba(230, 230, 250, 0.5);
+	border-radius: 1px;
+	padding: 1px;
+}
+
+#recipe div.imgContainer {
+	height: 250px;
+}
+
+div.imgContainer img {
+	height: 100%;
+	width: 100%;
+	margin: auto;
+	display: block;
+	object-fit: contain;
+}
+
+div.recipe p {
+	padding-left: 10px;
+}
+
+#rate {
+	position: fixed;
+	position: -webkit-sticky;
+	float: right;
+	width: 45%;
+	top: 95px;
+	right: 0;
+}
+
+#rate #rateForm {
+	background-color: rgba(36, 36, 36, 0.9);
+	border-bottom: 2px solid lavender;
+	width: auto;
+	margin: 0 12% 0 24%;
+	padding: 10px;
+}
+
+#rate #rheader {
+	text-align: center;
+	font-weight: bold;
+	font-size: large;
+	text-decoration: underline;
+}

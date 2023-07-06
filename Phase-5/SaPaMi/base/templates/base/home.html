@@ -1,0 +1,58 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block title %}SaPaMi - Home{% endblock title %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'styles/home.css' %}">
+{% endblock head %}
+
+{% block content %}
+<div id="filters">
+    <form action="{% url 'home' %}" method="GET" id="filterForm">
+        <p id="fHeader">Filters</p>
+        <label for="package_name">Name:</label><br>
+        <input type="text" id="package_name" name="package_name" placeholder="Write a package name..." value="{{fform.cleaned_data.package_name}}"><br>
+
+        <label for="center_name">Health Center Name:</label><br>
+        <input type="text" id="center_name" name="center_name" placeholder="Write a health center name..." value="{{fform.cleaned_data.center_name}}"><br>
+
+        <label for="work_field">Health Center Work Field:</label><br>
+        <select id="work_field" name="work_field">
+            <option value="all" {% if not fform.cleaned_data.work_field %}selected{% endif %}>All</option>
+            <option value="PS" {% if fform.cleaned_data.work_field == 'PS' %}selected{% endif %}>Psychology</option>
+            <option value="PY" {% if fform.cleaned_data.work_field == 'PY' %}selected{% endif %}>Psychiatry</option>
+            <option value="PT" {% if fform.cleaned_data.work_field == 'PT' %}selected{% endif %}>Psychotherapy</option>
+            <option value="PA" {% if fform.cleaned_data.work_field == 'PA' %}selected{% endif %}>Psychoanalysis</option>
+        </select><br>
+
+        <label for="price_min" class="leftalign">Minimum Price:</label>
+        <span id="priceMinText" class="rightalign">{{fform.cleaned_data.price_min}}</span><br>
+        <input type="range" id="price_min" name="price_min" min="0" max="1000" value="{{fform.cleaned_data.price_min}}"><br>
+
+        <label for="price_max" class="leftalign">Maximum Price:</label>
+        <span id="priceMaxText" class="rightalign">{{fform.cleaned_data.price_max}}</span><br>
+        <input type="range" id="price_max" name="price_max" min="0" max="1000" value="{{fform.cleaned_data.price_max}}"><br>
+
+        <div>
+            <button type="submit" class="inputbtnG" id="fApplyBtn" onclick="submitFiltersForm()">Apply</button>
+            <button type="button" class="inputbtnG rightalign" id="fClearBtn" onclick="clearFilters()">Clear</button>
+        </div>
+    </form>
+</div>
+
+<div id="packages">
+    {% for package in packages %}
+    <div class="package">
+        <div class="imgContainer">
+            <img src="" alt="Package #{{package.id}}'s image" title=""></img>
+        </div>
+        <p>ID: {{package.id}}</p>
+        <p>Name: {{package.name}}</p>
+        <p>Health Center: {{package.health_center.name}}</p>
+        <a class="btnFuture" href="{% url 'packages' id=package.id %}">More Info</a>
+    </div>
+    {% endfor %}
+</div>
+
+<script src="{% static 'scripts/home.js' %}"></script>
+{% endblock content %}

@@ -1,0 +1,13 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block title %}SaPaMi - Not Found{% endblock title %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'styles/err.css' %}">
+{% endblock head %}
+
+{% block content %}
+<h1>SaPaMi</h1>
+<h2>Error: <em>404</em></h2>
+<p>Requested page was not found!</p>
+{% endblock content %}
