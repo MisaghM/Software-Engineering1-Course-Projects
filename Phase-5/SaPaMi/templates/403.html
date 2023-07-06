@@ -1,0 +1,13 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block title %}SaPaMi - Forbidden{% endblock title %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'styles/err.css' %}">
+{% endblock head %}
+
+{% block content %}
+<h1>SaPaMi</h1>
+<h2>Error: <em>403</em></h2>
+<p>You are not authorized to access this resource.</p>
+{% endblock content %}

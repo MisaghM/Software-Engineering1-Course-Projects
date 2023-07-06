@@ -14,6 +14,10 @@ def my404(request, exception):
     return render(request, '404.html')
 
 
+def my403(request, exception):
+    return render(request, '403.html')
+
+
 @require_GET
 def home(request):
     fform = FilterForm(request.GET)

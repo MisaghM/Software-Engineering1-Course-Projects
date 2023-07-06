@@ -1,0 +1,15 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block title %}SaPaMi - Thank You{% endblock title %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'styles/reserve.css' %}">
+{% endblock head %}
+
+{% block content %}
+<div class="confirm">
+    <p class="centertext"><span class="emphasis">Thank You!</span></p>
+    <p class="centertext">For using our services</p>
+    <p class="centertext small">You can check your reservations by pressing the Reservations button</p>
+</div>
+{% endblock content %}

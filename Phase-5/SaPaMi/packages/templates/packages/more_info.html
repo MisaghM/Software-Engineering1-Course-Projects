@@ -21,7 +21,13 @@
         <p>Doctor: {{package.doctor.name}}</p>
     </div>
     <div class="package">
-        <p>Average Rating:  {{10}} / 5 </p>
+        <p>Average Rating: {{10}} / 5 </p>
+    </div>
+    <div class="package">
+        <form method="post" action="{% url 'reserve_package' package.id %}">
+            {% csrf_token %}
+            <input type="submit" name="submit" value="Reserve" />
+        </form>
     </div>
 </div>
 

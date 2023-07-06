@@ -1,0 +1,26 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block title %}SaPaMi - Reserve{% endblock title %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'styles/reserve.css' %}">
+{% endblock head %}
+
+{% block content %}
+<div class="confirm">
+    <p class="centertext">You should pay <span class="emphasis">30%</span> of the package price</p>
+    <p>Total Price: {{package.approximate_price}}</p>
+    <p>Paying: <span id="paying" class="emphasis"></span></p>
+</div>
+
+<div class="confirm">
+    <form method="post" action="{% url 'confirm_reserve' package.id %}">
+        {% csrf_token %}
+        <input type="submit" name="submit" value="Confirm" />
+    </form>
+</div>
+
+<script>
+    document.getElementById("paying").innerText = 0.3 * {{package.approximate_price}};
+</script>
+{% endblock content %}

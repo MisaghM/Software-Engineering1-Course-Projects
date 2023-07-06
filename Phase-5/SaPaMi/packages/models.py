@@ -56,3 +56,6 @@ class ServiceRecord(models.Model):
     paid = models.FloatField()
     status = models.CharField(max_length=1, choices=Status.choices)
     bill = models.ForeignKey(Bill, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.service.__str__() + ' - ' + self.status

@@ -4,6 +4,7 @@
         <li class="leftalign"><a href="{% url 'home' %}" id="navHome">Home</a></li>
         {% if request.user.is_authenticated %}
         <li class="leftalign"><a href="javascript:void(0)" id="navPackageInfo">Package Info</a></li>
+        <li class="leftalign"><a href="{% url 'user_reservations' %}" id="navReservations">Reservations</a></li>
         <li class="rightalign">
             <a href="{% url 'cas-logout' %}">Logout</a>
         </li>
@@ -16,3 +17,12 @@
     </ul>
 </nav>
 <script src="{% static 'scripts/navbar.js' %}"></script>
+<script>
+    {% if request.resolver_match.url_name == 'home' %}
+    document.getElementById("navHome").setAttribute("class", "active");
+    {% elif request.resolver_match.url_name == 'packages' %}
+    document.getElementById("navPackageInfo").setAttribute("class", "active");
+    {% elif request.resolver_match.url_name == 'reservations' %}
+    document.getElementById("navReservations").setAttribute("class", "active");
+    {% endif %}
+</script>

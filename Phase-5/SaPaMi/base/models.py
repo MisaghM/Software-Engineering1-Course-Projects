@@ -67,3 +67,6 @@ class Doctor(models.Model):
     medical_id = models.CharField(max_length=100)
     degree = models.CharField(max_length=100)
     doctor_license = models.ForeignKey(Document, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name

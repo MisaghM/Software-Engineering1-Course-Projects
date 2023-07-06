@@ -1,15 +1,22 @@
-from django.shortcuts import render
+from datetime import datetime
+
+from django.shortcuts import render, redirect
+from django.views.decorators.http import require_POST
+from django.contrib.auth.decorators import login_required
+from django.core.exceptions import PermissionDenied
 
 from .models import TherapeuticPackage, Reservation, TherapeuticService, ServiceRecord
-from base.models import HealthExpert
+from base.models import HealthExpert, Patient
 from payment.models import Bill
 
 
 def more_info(request, id):
-    return render(request, 'packages/more_info.html', {'package': TherapeuticPackage.objects.get(id=id)})
+    return render(request, 'packages/more_info.html', {
+        'package': TherapeuticPackage.objects.get(id=id),
+    })
 
 
-def new_reservation(user):
+def new_reservation(user: Patient):
     bill = Bill.objects.create(
         total_cost=0,
         total_paid=0
@@ -25,17 +32,19 @@ def new_reservation(user):
     return reservation
 
 
+@login_required(login_url='cas')
+@require_POST
 def reserve_package(request, id):
     package = TherapeuticPackage.objects.get(id=id)
-    date = request.POST.get('date')
-    user = request.user
+    user = Patient.objects.get(user=request.user)
+
     reservation = Reservation.objects.filter(user=user).order_by('id').last()
     if reservation is None or reservation.status != Reservation.Status.PENDING:
         reservation = new_reservation(user)
     service = TherapeuticService.objects.create(
         reservation=reservation,
         therapeutic_package=package,
-        datetime=date
+        datetime=datetime.now()
     )
     ServiceRecord.objects.create(
         service=service,
@@ -46,19 +55,29 @@ def reserve_package(request, id):
     )
     reservation.bill.total_cost += package.approximate_price
     reservation.bill.save()
+    return redirect('confirm_reserve', id)
     return render(request, 'packages/reserve_package.html', {'package': package})
 
 
+@login_required(login_url='cas')
+def confirm_reserve(request, id):
+    if request.method == 'POST':
+        return render('packages/reserve_thanks.html')
+    return render(request, 'packages/confirm_reserve.html')
+
+
 def user_reservations(request):
-    user = request.user
+    user = Patient.objects.get(user=request.user)
     reservations = Reservation.objects.filter(user=user)
     return render(request, 'packages/reservations.html', {'reservations': reservations})
 
 
 def user_reservation(request, id):
     reservation = Reservation.objects.get(id=id)
-    user = request.user
-    if reservation.user.user.username != user.username:
-        raise Exception('User is not authorized to view this reservation')
+    if reservation.user.user.username != request.user.username:
+        raise PermissionDenied
     services = TherapeuticService.objects.filter(reservation=reservation)
-    return render(request, 'packages/reservation.html', {'reservation': reservation, 'services': services})
+    return render(request, 'packages/reservation.html', {
+        'reservation': reservation,
+        'services': services
+    })
