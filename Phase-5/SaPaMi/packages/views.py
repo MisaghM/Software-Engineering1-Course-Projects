@@ -19,7 +19,8 @@ def new_reservation(user):
         raise Exception('No health expert exists')
     reservation = Reservation.objects.create(
         user=user,
-        bill=bill
+        bill=bill,
+        health_expert=health_expert
     )
     return reservation
 
