@@ -18,29 +18,29 @@
 {% endif %}
 
 <div class="form" id="lform" style="display: block;">
-    <form action="{% url 'cas-login' %}" method="POST" id="loginform">
+    <form action="{% url 'cas' %}" method="POST" id="loginform">
         {% csrf_token %}
-        {{lform}}
-        <!-- <label for="loginUsername">Username:</label><br>
-        <input type="text" id="loginUsername" name="username" placeholder="Write your username..." required><br>
+        <label for="loginUsername">Username:</label><br>
+        <input type="text" id="loginUsername" name="username" placeholder="Write your username..." value="{{lform.cleaned_data.username}}" required><br>
         <label for="loginPassword">Password:</label><br>
-        <input type="password" id="loginPassword" name="password" placeholder="Write your password..." required><br> --->
+        <input type="password" id="loginPassword" name="password" placeholder="Write your password..." required><br> -
         <input type="checkbox" id="loginShowPassword" onclick="showPassword(this)">
         <label for="loginShowPassword">Show Password</label><br>
+        <input type="hidden" id="casType" name="casType" value="login">
         <input type="submit" value="Login">
         <p>Don't have an account? <a href="#" onclick="changeForms('signupform'); return false">Sign Up</a></p>
     </form>
 </div>
 
 <div class="form" id="sform" style="display: none;">
-    <form action="{% url 'cas-signup' %}" method="POST" id="signupform">
+    <form action="{% url 'cas' %}" method="POST" id="signupform">
         {% csrf_token %}
         <label for="signupUsername">Username:</label><br>
-        <input type="text" id="signupUsername" name="username" placeholder="Write your username..." required><br>
+        <input type="text" id="signupUsername" name="username" placeholder="Write your username..." value="{{sform.cleaned_data.username}}" required><br>
         <label for="signupSsn">SSN:</label><br>
         <input type="text" id="signupSsn" name="ssn" placeholder="Write your SSN..." required><br>
         <label for="signupPassword">Password:</label><br>
-        <input type="password" id="signupPassword" name="password" placeholder="Write your password..." required><br>
+        <input type="password" id="signupPassword" name="password1" placeholder="Write your password..." required><br>
         <input type="checkbox" id="signupShowPassword" onclick="showPassword(this)">
         <label for="signupShowPassword">Show Password.</label><br><br>
 
@@ -52,9 +52,16 @@
         <input type="radio" name="usertype" id="signupUsertypeOrg" value="org">
         <label for="signupUsertypeOrg">Organization</label><br>
 
+        <input type="hidden" id="casType" name="casType" value="signup">
         <br><input type="submit" value="Signup">
         <p>Already have an account? <a href="#" onclick="changeForms('loginform'); return false;">Login</a></p>
     </form>
 </div>
+
 <script src="{% static 'scripts/cas.js' %}"></script>
+<script>
+    {% if sform.cleaned_data.username %}
+    changeForms('signupform');
+    {% endif %}
+</script>
 {% endblock content %}

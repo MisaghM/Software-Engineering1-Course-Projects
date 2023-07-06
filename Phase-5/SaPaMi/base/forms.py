@@ -1,5 +1,8 @@
 import django.forms as forms
-from .models import User, Patient, HealthCenter
+import django.contrib.auth.forms as aforms
+from django.core.exceptions import ValidationError
+
+from .models import HealthCenter
 
 
 class FilterForm(forms.Form):
@@ -32,8 +35,28 @@ class FilterForm(forms.Form):
     )
 
 
-class UserForm(forms.ModelForm):
-    class Meta:
-        model = User
-        fields = ['username', 'password']
-        help_texts = {'username': None}
+class LoginForm(aforms.AuthenticationForm):
+    error_messages = {
+        'invalid_login': 'Incorrect %(username)s OR password.',
+        'inactive': 'Account is inactive',
+    }
+
+    def clean_username(self):
+        return self.cleaned_data['username'].lower()
+
+
+class SignupForm(aforms.BaseUserCreationForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        del self.fields['password2']
+        if self._meta.model.USERNAME_FIELD in self.fields:
+            self.fields[self._meta.model.USERNAME_FIELD].widget.attrs["autofocus"] = True
+
+    def clean_username(self):
+        username = self.cleaned_data.get('username').lower()
+        if self._meta.model.objects.filter(username__iexact=username).exists():
+            self._update_errors(ValidationError({
+                'username': self.instance.unique_error_message(self._meta.model, ['username'])
+            }))
+        else:
+            return username

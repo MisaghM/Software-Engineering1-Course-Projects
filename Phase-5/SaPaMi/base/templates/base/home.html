@@ -18,7 +18,7 @@
 
         <label for="work_field">Health Center Work Field:</label><br>
         <select id="work_field" name="work_field">
-            <option value="all" {% if not fform.cleaned_data.work_field %}selected{% endif %}>All</option>
+            <option value="all">All</option>
             <option value="PS" {% if fform.cleaned_data.work_field == 'PS' %}selected{% endif %}>Psychology</option>
             <option value="PY" {% if fform.cleaned_data.work_field == 'PY' %}selected{% endif %}>Psychiatry</option>
             <option value="PT" {% if fform.cleaned_data.work_field == 'PT' %}selected{% endif %}>Psychotherapy</option>

@@ -2,7 +2,7 @@ div.container {
 	width: 60%;
 }
 
-div.recipe {
+div.package {
 	display: block;
 	position: relative;
 	padding: 10px;
@@ -13,16 +13,16 @@ div.recipe {
 	transition: all 0.1s;
 }
 
-div.recipe #recipe {
+div.package #package {
 	height: 250px;
 }
 
-div.recipe:hover {
+div.package:hover {
 	background-color: rgba(44, 44, 44, 0.9);
 	transform: scale(1.012);
 }
 
-div.recipe div.imgContainer {
+div.package div.imgContainer {
 	float: left;
 	width: 40%;
 	margin-right: 10px;
@@ -31,7 +31,7 @@ div.recipe div.imgContainer {
 	padding: 1px;
 }
 
-#recipe div.imgContainer {
+#package div.imgContainer {
 	height: 250px;
 }
 

@@ -1,10 +1,41 @@
 {% extends 'main.html' %}
-{% block content %}
+{% load static %}
 {% block title %}SaPaMi - Package{% endblock title %}
 
 {% block head %}
 <link rel="stylesheet" href="{% static 'styles/more_info.css' %}">
 {% endblock head %}
 
+{% block content %}
+<div class="container">
+    <div class="package" id="package">
+        <div class="imgContainer">
+            <img id="packageImg" src="" alt="package's image" title="">
+        </div>
+        <p>ID: {{package.id}}</p>
+        <p>Title: {{package.name}}</p>
+        <p>Time: {{package.required_time}}</p>
+        <p>Approximate Price: {{package.approximate_price}}</p>
+        <p>Prerequisites: {{package.prerequisites}}</p>
+        <p>Health Center: {{package.health_center.name}}</p>
+        <p>Doctor: {{package.doctor.name}}</p>
+    </div>
+    <div class="package">
+        <p>Average Rating:  {{10}} / 5 </p>
+    </div>
+</div>
 
+<div id="rate">
+    <form action="rate" method="POST" id="rateForm">
+        <p id="rheader">Rating</p>
+        <span class="leftalign" style="clear: left;">Your Rating:</span>
+        <span class="rightalign" id="yourRating" style="clear: right;">0.0</span><br><br>
+        <label for="rating" class="leftalign">New Rating:</label>
+        <span id="ratingText" class="rightalign">1</span><br>
+        <input type="range" id="rating" name="score" min="1" max="5" step="0.1" value="1"><br>
+        <button type="button" class="inputbtnG" onclick="rate()">Rate</button>
+    </form>
+</div>
+
+<script src="{% static 'scripts/more_info.js' %}"></script>
 {% endblock content %}

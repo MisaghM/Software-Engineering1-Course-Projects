@@ -1,13 +1,12 @@
 from django.shortcuts import render, redirect
-from django.views.decorators.http import require_GET, require_POST
+from django.views.decorators.http import require_GET
 from django.http import HttpResponseBadRequest
 from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 
-from .models import User, Patient, HealthCenter
-from .forms import UserForm, FilterForm
+from .forms import LoginForm, SignupForm, FilterForm
+from .models import User, Patient
 from packages.models import TherapeuticPackage
 
 
@@ -39,93 +38,64 @@ def home(request):
     return render(request, 'base/home.html', {'packages': packages, 'fform': fform})
 
 
-@require_GET
 def cas(request):
     if request.user.is_authenticated:
         return redirect('home')
-    return render(request, 'base/cas.html', {
-        'lform': AuthenticationForm(),
-        'sform': UserCreationForm(),
-    })
+    lform = LoginForm()
+    sform = SignupForm()
 
+    if request.method == 'POST':
+        type = request.POST.get('casType')
+        if type == 'login':
+            lform = LoginForm(data=request.POST)
+            if lform.is_valid():
+                user = lform.get_user()
+                if user is not None:
+                    login(request, user)
+                    return redirect('home')
+                else:
+                    messages.error(request, 'Wrong username/password')
+            else:
+                if not User.objects.filter(username__iexact=lform.data['username']).exists():
+                    messages.error(request, 'User does not exist')
+                else:
+                    messages.error(request, 'Wrong username/password')
+        elif type == 'signup':
+            sform = SignupForm(data=request.POST)
+            if sform.is_valid():
+                usertype = request.POST.get('usertype')
+                ssn = request.POST.get('ssn')
+                if None in (usertype, ssn):
+                    return HttpResponseBadRequest()
+                if not ssn.isdigit():
+                    messages.error(request, 'SSN should be a number')
+                    return redirect('cas')
 
-@require_POST
-def cas_login(request):
-    if request.user.is_authenticated:
-        return redirect('home')
-    form = AuthenticationForm(request.POST)
-    if form.is_valid():
-        user = form.get_user()
-        if user is not None:
-            login(request, user)
-            return redirect('home')
+                user = sform.save(commit=True)
+                if usertype == 'user':
+                    Patient.objects.create(
+                        user=user,
+                        ssn=ssn,
+                    )
+                elif usertype == 'expert':
+                    pass
+                elif usertype == 'org':
+                    pass
+
+                login(request, user)
+                return redirect('home')
+            else:
+                messages.error(request, 'Username already exists')
         else:
-            messages.error(request, 'Wrong username/password')
-    else:
-        messages.error(request, 'User does not exist')
+            return HttpResponseBadRequest()
 
-    return render(request, 'base/cas.html', {'lform': form})
-    # username = request.POST.get('username').lower()
-    # password = request.POST.get('password')
-    # try:
-    #     user = User.objects.get(username=username)
-    # except:
-    #     messages.error(request, 'User does not exist')
-    #     return redirect('cas')
-    # user = authenticate(request, username=username, password=password)
+    return render(request, 'base/cas.html', {
+        'lform': lform,
+        'sform': sform,
+    })
 
 
 @login_required(login_url='cas')
 def cas_logout(request):
     logout(request)
     return redirect('home')
-
-
-@require_POST
-def cas_signup(request):
-    if request.user.is_authenticated:
-        return redirect('home')
-    form = UserCreationForm(request.POST)
-    if form.is_valid():
-        user = form.save(commit=False)
-        user.username = user.username.lower()
-        user.save()
-        login(request, user)
-        return redirect("home")
-    else:
-        messages.error(request, "An error occour  during registration")
-
-    return render(request, "base/register.html", {"form": form})
-    # username = request.POST.get('username').lower()
-    # password = request.POST.get('password')
-    # usertype = request.POST.get('usertype')
-    # ssn: str = request.POST.get('ssn')
-    # if None in (username, password, usertype, ssn):
-    #     return HttpResponseBadRequest()
-    # if not ssn.isdigit():
-    #     messages.error(request, 'SSN should be a number')
-    #     return redirect('cas')
-
-    # try:
-    #     user = User.objects.get(username=username)
-    #     messages.error(request, 'Username is already taken')
-    #     return redirect('cas')
-    # except:
-    #     pass
-
-    # if usertype == 'user':
-    #     user = User.objects.create(
-    #         username=username,
-    #         password=password,
-    #     )
-    #     patient = Patient.objects.create(
-    #         user=user,
-    #         ssn=ssn,
-    #     )
-    #     login(request, user)
-    # elif usertype == 'expert':
-    #     pass
-    # elif usertype == 'org':
-    #     pass
-    # messages.error(request, 'Invalid user type')
-    # return redirect('cas')
