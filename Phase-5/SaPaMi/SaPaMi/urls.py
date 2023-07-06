@@ -6,5 +6,5 @@ handler404 = 'base.views.my404'
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('base.urls')),
-    path('packages/', include('packages.urls')),
+    path('', include('packages.urls')),
 ]

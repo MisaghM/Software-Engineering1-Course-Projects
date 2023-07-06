@@ -1,6 +1,8 @@
 from django.shortcuts import render
 
-from .models import TherapeuticPackage, Reservation, TherapeuticService, ServiceRecord, Bill, HealthExpert
+from .models import TherapeuticPackage, Reservation, TherapeuticService, ServiceRecord
+from base.models import HealthExpert
+from payment.models import Bill
 
 
 def more_info(request, id):
@@ -44,3 +46,18 @@ def reserve_package(request, id):
     reservation.bill.total_cost += package.approximate_price
     reservation.bill.save()
     return render(request, 'packages/reserve_package.html', {'package': package})
+
+
+def user_reservations(request):
+    user = request.user
+    reservations = Reservation.objects.filter(user=user)
+    return render(request, 'packages/reservations.html', {'reservations': reservations})
+
+
+def user_reservation(request, id):
+    reservation = Reservation.objects.get(id=id)
+    user = request.user
+    if reservation.user.user.username != user.username:
+        raise Exception('User is not authorized to view this reservation')
+    services = TherapeuticService.objects.filter(reservation=reservation)
+    return render(request, 'packages/reservation.html', {'reservation': reservation, 'services': services})
