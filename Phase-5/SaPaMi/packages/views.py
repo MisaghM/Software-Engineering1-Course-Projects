@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
@@ -37,7 +35,7 @@ def new_reservation(user: Patient):
 def reserve_package(request, id):
     package = TherapeuticPackage.objects.get(id=id)
     user = Patient.objects.get(user=request.user)
-    date = request.POST.get('date')
+    date = request.POST.get('reserveDate')
     reservation = Reservation.objects.filter(user=user).order_by('id').last()
     if reservation is None or reservation.status != Reservation.Status.PENDING:
         reservation = new_reservation(user)
@@ -55,37 +53,59 @@ def reserve_package(request, id):
     )
     reservation.bill.total_cost += package.approximate_price
     reservation.bill.save()
-    return redirect('confirm_reserve', id)
+    return redirect('confirm_service', service.id)
 
 
 @login_required(login_url='cas')
-def confirm_reserve(request, id):
-    package = TherapeuticPackage.objects.get(id=id)
+def confirm_service(request, id):
+    service = TherapeuticService.objects.get(id=id)
+    service_record = ServiceRecord.objects.get(service=service)
+    package = service.therapeutic_package
+    already_paid = service_record.status != ServiceRecord.Status.UNPAID
+    if already_paid:
+        return render(request, 'packages/reserve_thanks.html', {'already_paid': already_paid})
     if request.method == 'POST':
-        reservation = Reservation.objects.filter(user=Patient.objects.get(user=request.user)).order_by('id').last()
-        service = TherapeuticService.objects.filter(reservation=reservation, therapeutic_package=package).order_by('id').last()
-        service_record = ServiceRecord.objects.get(service=service)
+        user = Patient.objects.get(user=request.user)
+        reservation = Reservation.objects.filter(user=user).order_by('id').last()
         service_record.paid = 0.3 * service_record.cost
         service_record.status = ServiceRecord.Status.PREPAID
         service_record.save()
         reservation.bill.total_paid += service_record.paid
         reservation.bill.save()
-        return render(request, 'packages/reserve_thanks.html')
-    return render(request, 'packages/confirm_reserve.html', {'package': package})
+        return render(request, 'packages/reserve_thanks.html', {'already_paid': already_paid})
+    return render(request, 'packages/confirm_service.html', {
+        'package': package,
+        'service': service,
+    })
 
 
-def user_reservations(request):
+@login_required(login_url='cas')
+def reservations(request):
     user = Patient.objects.get(user=request.user)
     reservations = Reservation.objects.filter(user=user)
-    return render(request, 'packages/reservations.html', {'reservations': reservations})
+    status = [Reservation.Status(x.status).label for x in reservations]
+    return render(request, 'packages/reservations.html', {
+        'reservations': zip(reservations, status),
+    })
 
 
-def user_reservation(request, id):
+@login_required(login_url='cas')
+def reservation(request, id):
     reservation = Reservation.objects.get(id=id)
     if reservation.user.user.username != request.user.username:
         raise PermissionDenied
+    reservation_status = Reservation.Status(reservation.status).label
+
     services = TherapeuticService.objects.filter(reservation=reservation)
+    service_records = []
+    service_status = []
+    for x in services:
+        sr = ServiceRecord.objects.get(service=x)
+        service_records.append(sr)
+        service_status.append(ServiceRecord.Status(sr.status).label)
+
     return render(request, 'packages/reservation.html', {
         'reservation': reservation,
-        'services': services
+        'reservation_status': reservation_status,
+        'services': zip(services, service_records, service_status),
     })

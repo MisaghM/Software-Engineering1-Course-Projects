@@ -12,6 +12,10 @@
 	font-size: small;
 }
 
+.underscore {
+	text-decoration: underline;
+}
+
 div.confirm {
     background-color: rgb(40, 40, 40);
 	border-bottom: 2px solid lavender;

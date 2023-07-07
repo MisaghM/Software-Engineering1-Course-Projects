@@ -8,22 +8,27 @@ from base.models import HealthExpert, Doctor, HealthCenter
 
 def create_superuser(apps, schema_editor):
     User = get_user_model()
-    User.objects.create(
+    user = User(
         username='admin',
         password='admin',
         is_superuser=True,
         is_staff=True,
         is_active=True,
     )
+    user.set_password('admin')
+    user.save()
 
 
 def create_models(apps, schema_editor):
     User = get_user_model()
+    user = User(
+        username='health_expert',
+        password='health_expert',
+    )
+    user.set_password('health_expert')
+    user.save()
     HealthExpert.objects.create(
-        user=User.objects.create(
-            username='health_expert',
-            password='health_expert',
-        ),
+        user=user,
         email="test@test.com",
         experience=10,
         skype_id="skype_id",

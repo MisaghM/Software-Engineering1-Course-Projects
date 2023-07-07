@@ -11,5 +11,8 @@
     <p class="centertext"><span class="emphasis">Thank You!</span></p>
     <p class="centertext">For using our services</p>
     <p class="centertext small">You can check your reservations by pressing the Reservations button</p>
+    {% if already_paid %}
+    <p class="centertext small underscore">You have already paid for this service</p>
+    {% endif %}
 </div>
 {% endblock content %}

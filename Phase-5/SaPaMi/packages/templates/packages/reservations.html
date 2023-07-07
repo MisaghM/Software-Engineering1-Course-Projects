@@ -3,9 +3,17 @@
 {% block title %}SaPaMi - Reservations{% endblock title %}
 
 {% block head %}
-<link rel="stylesheet" href="{% static 'styles/reserve.css' %}">
+<link rel="stylesheet" href="{% static 'styles/reservations.css' %}">
 {% endblock head %}
 
 {% block content %}
-
+<div id="reservations">
+    {% for res in reservations %}
+    <a class="reservation" href="{% url 'reservation' id=res.0.id %}">
+        <p>ID: {{res.0.id}}</p>
+        <p>Status: {{res.1}}</p>
+        <p>Health Expert: {{res.0.health_expert.user.username}}</p>
+    </a>
+    {% endfor %}
+</div>
 {% endblock content %}

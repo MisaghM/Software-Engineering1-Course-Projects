@@ -7,7 +7,7 @@ class Bill(models.Model):
     total_paid = models.FloatField()
 
     def __str__(self):
-        return self.total_cost
+        return str(self.total_cost)
 
 
 class Payment(models.Model):

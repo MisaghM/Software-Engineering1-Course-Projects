@@ -1,0 +1,36 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block title %}SaPaMi - Reservations{% endblock title %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'styles/reservation.css' %}">
+{% endblock head %}
+
+{% block content %}
+<div id="reservation">
+    <p id="rheader">Reservation</p>
+    <p>ID: {{reservation.id}}</p>
+    <p>Status: {{reservation_status}}</p>
+    <p>Health Expert: {{reservation.health_expert.user.username}}</p>
+    <p>Total Cost: {{reservation.bill.total_cost}}</p>
+    <p>Total Paid: {{reservation.bill.total_paid}}</p>
+</div>
+
+<div id="services">
+    {% for serv in services %}
+    <div class="service">
+        <p class="sheader">Service #{{forloop.counter}}</p>
+        <p>Package Name: {{serv.0.therapeutic_package.name}}</p>
+        <p>Reservation Date: {{serv.0.reservation_date}}</p>
+        <p>Pending Date: {{serv.0.datetime|date}}</p>
+        <p>Cost: {{serv.1.cost}} Paid: {{serv.1.paid}}</p>
+        <p>Status: {{serv.2}}</p>
+        {% if serv.2 == 'Unpaid' %}
+        <a href="{% url 'confirm_service' serv.0.id %}">CONFIRM/PAY</a>
+        {% else %}
+        <span class="alike">PAYED</span>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}

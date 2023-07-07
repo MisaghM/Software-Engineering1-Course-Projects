@@ -1,0 +1,65 @@
+#reservation {
+    background-color: rgb(40, 40, 40);
+    border-bottom: 2px solid lavender;
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 3%;
+    border-radius: 4px;
+    padding: 8px 20px;
+}
+
+#reservation #rheader {
+    text-align: center;
+    font-weight: bold;
+    font-size: large;
+    text-decoration: underline;
+}
+
+#services {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 15px;
+}
+
+.service .sheader {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+div.service {
+    color: inherit;
+    text-decoration: inherit;
+    flex: 1 0 20%;
+    height: 250px;
+    display: block;
+    padding: 5px 10px 10px;
+    background-color: rgba(36, 36, 36, 0.9);
+    margin: 25px 15px 0 15px;
+    border-left: 2px solid lavender;
+    transition: all 0.1s;
+}
+
+div.service:hover {
+    background-color: rgba(44, 44, 44, 0.9);
+    transform: scale(1.012);
+}
+
+div.service p {
+    padding-left: 10px;
+}
+
+div.service span.alike {
+    text-decoration: inherit;
+    margin-left: 10px;
+    border-top: 2px solid lavender;
+    border-bottom: 2px solid lavender;
+}
+
+div.service a {
+    color: rgb(0, 140, 200);
+    text-decoration: inherit;
+    margin-left: 10px;
+    border-top: 2px solid lavender;
+    border-bottom: 2px solid lavender;
+}

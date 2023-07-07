@@ -1,0 +1,27 @@
+#reservations {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 15px;
+}
+
+a.reservation {
+    color: inherit;
+    text-decoration: inherit;
+    flex: 1 0 20%;
+    height: 130px;
+    display: block;
+    padding: 10px;
+    background-color: rgba(36, 36, 36, 0.9);
+    margin: 30px 15px 0 15px;
+    border-left: 2px solid lavender;
+    transition: all 0.1s;
+}
+
+a.reservation:hover {
+    background-color: rgba(44, 44, 44, 0.9);
+    transform: scale(1.012);
+}
+
+a.reservation p {
+    padding-left: 10px;
+}

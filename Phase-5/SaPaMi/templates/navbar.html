@@ -4,14 +4,14 @@
         <li class="leftalign"><a href="{% url 'home' %}" id="navHome">Home</a></li>
         <li class="leftalign"><a href="javascript:void(0)" id="navPackageInfo">Package Info</a></li>
         {% if request.user.is_authenticated %}
-        <li class="leftalign"><a href="{% url 'user_reservations' %}" id="navReservations">Reservations</a></li>
+        <li class="leftalign"><a href="{% url 'reservations' %}" id="navReservations">Reservations</a></li>
         <li class="rightalign">
             <a href="{% url 'cas-logout' %}">Logout</a>
         </li>
         <li class="rightalign"><span id="username">{{request.user.username}}</span></li>
         {% else %}
         <li class="rightalign">
-            <a href="{% url 'cas' %}">Login</a>
+            <a href="{% url 'cas' %}" id="navLogin">Login</a>
         </li>
         <li class="rightalign"><span id="welcome">Welcome to SaPaMi</span></li>
         {% endif %}
@@ -25,5 +25,7 @@
     document.getElementById("navPackageInfo").setAttribute("class", "active");
     {% elif request.resolver_match.url_name == 'reservations' %}
     document.getElementById("navReservations").setAttribute("class", "active");
+    {% elif request.resolver_match.url_name == 'cas' %}
+    document.getElementById("navLogin").setAttribute("class", "active");
     {% endif %}
 </script>
