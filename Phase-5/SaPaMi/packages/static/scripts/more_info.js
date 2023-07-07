@@ -2,20 +2,18 @@ const datePicker = document.getElementById("reserveDate");
 datePicker.valueAsDate = new Date();
 datePicker.setAttribute("min", new Date().toISOString().split("T")[0]);
 
+const userRate = document.getElementById("yourRating").innerHTML;
 const rateSlider = document.getElementById("rating");
 const rateText = document.getElementById("ratingText");
-const userRating = '10';
 
-document.getElementById("yourRating").innerHTML = userRating;
-
-rateSlider.value = userRating;
-rateText.innerHTML = rateSlider.value;
+rateSlider.value = (userRate == "None") ? 1 : userRate;
 rateSlider.oninput = function () {
     rateText.innerHTML = this.value;
 }
+rateText.innerHTML = rateSlider.value;
 
 function rate() {
-    if (rateSlider.value == userRating) {
+    if (rateSlider.value == userRate) {
         alert("Your rating has not changed.");
         return;
     }

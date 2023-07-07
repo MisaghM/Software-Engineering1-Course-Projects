@@ -30,6 +30,15 @@ class TherapeuticPackage(models.Model):
         return self.name
 
 
+class TherapeuticPackageRating(models.Model):
+    user = models.ForeignKey(Patient, on_delete=models.CASCADE)
+    therapeutic_package = models.ForeignKey(TherapeuticPackage, on_delete=models.CASCADE)
+    rating = models.FloatField()
+
+    def __str__(self):
+        return self.user.user.username + ' - ' + self.therapeutic_package.name
+
+
 class Service(models.Model):
     reservation_date = models.DateField(auto_now_add=True)
     reservation = models.ForeignKey(Reservation, on_delete=models.CASCADE)

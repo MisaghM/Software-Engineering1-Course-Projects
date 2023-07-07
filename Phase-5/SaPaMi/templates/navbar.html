@@ -6,7 +6,7 @@
         {% if request.user.is_authenticated %}
         <li class="leftalign"><a href="{% url 'reservations' %}" id="navReservations">Reservations</a></li>
         <li class="rightalign">
-            <a href="{% url 'cas-logout' %}">Logout</a>
+            <a href="{% url 'cas_logout' %}">Logout</a>
         </li>
         <li class="rightalign"><span id="username">{{request.user.username}}</span></li>
         {% else %}

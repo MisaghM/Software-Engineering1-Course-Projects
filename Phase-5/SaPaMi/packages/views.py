@@ -1,16 +1,29 @@
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseBadRequest
 from django.core.exceptions import PermissionDenied
+from django.db.models import Avg
 
-from .models import TherapeuticPackage, Reservation, TherapeuticService, ServiceRecord
+from .models import TherapeuticPackage, Reservation, TherapeuticService, ServiceRecord, TherapeuticPackageRating
 from base.models import HealthExpert, Patient
 from payment.models import Bill
 
 
 def more_info(request, id):
+    package = TherapeuticPackage.objects.get(id=id)
+    avg = TherapeuticPackageRating.objects.filter(therapeutic_package=package).aggregate(Avg('rating'))['rating__avg']
+
+    rating = None
+    if request.user.is_authenticated:
+        user = Patient.objects.get(user=request.user)
+        r = TherapeuticPackageRating.objects.filter(user=user, therapeutic_package=package).first()
+        if r is not None:
+            rating = r.rating
     return render(request, 'packages/more_info.html', {
-        'package': TherapeuticPackage.objects.get(id=id),
+        'package': package,
+        'avg': avg,
+        'rating': rating,
     })
 
 
@@ -77,6 +90,30 @@ def confirm_service(request, id):
         'package': package,
         'service': service,
     })
+
+
+@login_required(login_url='cas')
+@require_POST
+def rate_package(request, id):
+    package = TherapeuticPackage.objects.get(id=id)
+    if not request.user.is_authenticated:
+        return redirect('cas')
+    try:
+        rating = float(request.POST.get('rating'))
+    except:
+        return HttpResponseBadRequest()
+    user = Patient.objects.get(user=request.user)
+    rate = TherapeuticPackageRating.objects.filter(user=user, therapeutic_package=package).first()
+    if rate is None:
+        TherapeuticPackageRating.objects.create(
+            user=user,
+            therapeutic_package=package,
+            rating=rating,
+        )
+    else:
+        rate.rating = rating
+        rate.save()
+    return redirect('packages', id)
 
 
 @login_required(login_url='cas')
